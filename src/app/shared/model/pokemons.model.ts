@@ -16,4 +16,5 @@ export class Pokemons{
     sprites?:string;
     front_default?:string;
     thisFav?:string;
+    base_experience?:string;
 }

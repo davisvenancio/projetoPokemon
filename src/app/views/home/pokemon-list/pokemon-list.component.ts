@@ -6,13 +6,13 @@ import { PokemonService } from 'src/app/shared/service/pokemon.service';
 @Component({
   selector: 'app-pokemon-list',
   templateUrl: './pokemon-list.component.html',
-  styleUrls: ['./pokemon-list.component.css']
+  styleUrls: ['./pokemon-list.component.scss']
 })
 export class PokemonListComponent implements OnInit {
 
   apiURL = 'https://pokeapi.co/api/v2/pokemon/?offset=0&limit=45';
   pg: pegeable[] = [];
-  pokemonsUrl : pegeable[] = [];
+  pokemonsUrl: pegeable[] = [];
   pokemonsPage: Pokemons[] = [];
   previous: any;
   next: any;
@@ -25,50 +25,51 @@ export class PokemonListComponent implements OnInit {
     this.getPage(this.apiURL);
   }
 
-  getPage(apiURL:any){
+  getPage(apiURL: any) {
     this.pkService.getPage(apiURL).subscribe(data => {
       this.pg = data.results;
 
-      if(data.previous === null){
+      if (data.previous === null) {
         this.previous = false;
-      }else{
+      } else {
         this.previous = data.previous;
       }
 
-      if(data.next === null){
+      if (data.next === null) {
         this.next = false;
-      }else{
+      } else {
         this.next = data.next;
       }
 
       this.pg.forEach(element => {
-        this.pkService.getPokemonSingle(element.url).subscribe(data =>{
+        this.pkService.getPokemonSingle(element.url).subscribe(data => {
           this.pokemonsPage.push(data);
           this.favLocalStr(data);
         });
       });
+      console.log(this.pokemonsPage);
     });
   }
-  getImg(img:any) {
+  getImg(img: any) {
     return img.other.dream_world.front_default;
   }
-  pkType(type: any){
+  pkType(type: any) {
     return type.type.name;
   }
 
-  bntPrevious(){
+  bntPrevious() {
     this.pokemonsPage = [];
     this.getPage(this.previous);
   }
-  bntNext(){
+  bntNext() {
     this.pokemonsPage = [];
     this.getPage(this.next);
   }
-  favPokemon(pokemon:any){
+  favPokemon(pokemon: any) {
     pokemon.thisFav = !pokemon.thisFav;
-		pokemon.thisFav ? localStorage.setItem(pokemon.name, pokemon.id) : localStorage.removeItem(pokemon.name)
+    pokemon.thisFav ? localStorage.setItem(pokemon.name, pokemon.id) : localStorage.removeItem(pokemon.name)
   }
-  favLocalStr(pokemon:any) {
-		return localStorage.getItem(pokemon.name) ?  pokemon.thisFav = true : pokemon.thisFav = false;
-	}
+  favLocalStr(pokemon: any) {
+    return localStorage.getItem(pokemon.name) ? pokemon.thisFav = true : pokemon.thisFav = false;
+  }
 }

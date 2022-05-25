@@ -13,16 +13,15 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider'; 
 import { MatProgressBarModule } from '@angular/material/progress-bar'; 
 import { HttpClientModule } from '@angular/common/http';
-import { PokemonBaseComponent } from './views/home/pokemon-list/pokemon-base/pokemon-base.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button'; 
 import { MatInputModule } from '@angular/material/input'; 
+import {NgPipesModule} from 'ngx-pipes';
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    PokemonListComponent,
-    PokemonBaseComponent
+    PokemonListComponent
     
   ],
   imports: [
@@ -38,7 +37,8 @@ import { MatInputModule } from '@angular/material/input';
     HttpClientModule,
     FlexLayoutModule,
     MatButtonModule,
-    MatInputModule
+    MatInputModule,
+    NgPipesModule
   ],
   providers: [],
   bootstrap: [AppComponent]
