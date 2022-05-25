@@ -1,0 +1,69 @@
+<div class="card-pokemon">
+  <div fxLayout="row wrap" fxLayoutAlign="center" style="padding-bottom: 10px;">
+    <button mat-raised-button color="primary" [disabled]="!previous" (click)="bntPrevious()"
+      style="margin-right: 5px;">Anterior</button>
+    <button mat-raised-button color="primary" [disabled]="!next" (click)="bntNext()">Próximo</button>
+  </div>
+  <div fxLayout="row wrap" fxLayoutAlign="center start">
+    <ng-container *ngFor="let pokemon of pokemonsPage">
+      <mat-card fxFlex="0 1 calc(20% - 11px)" fxFlex.lt-md="0 1 calc(50% - 11px)" fxFlex.lt-sm="100%">
+        <div fxFlex="50">
+          <div class="img-pokemon">
+            <img src="{{getImg(pokemon.sprites)}}">
+          </div>
+          <div class="row pokemon-info">
+            <p>
+              <span fxLayoutAlign="start" fxFlex="50">#{{pokemon.id}}</span>
+              <span fxLayoutAling="end" fxFlex="50">
+                <mat-icon aria-hidden="false" *ngIf="!pokemon.thisFav" (click)="favPokemon(pokemon)"
+                  style="float: right;">star</mat-icon>
+                <mat-icon aria-hidden="false" *ngIf="pokemon.thisFav" (click)="favPokemon(pokemon)"
+                  style="float: right;color: rgb(241, 241, 10);">star</mat-icon>
+              </span>
+            </p>
+            <h5 class="pokemon-title">{{pokemon.name}}</h5>
+            <p class="pokemon-type">
+              <ng-container *ngFor="let p of pokemon.types" [ngSwitch]="pkType(p)">
+                <span class="type-style grass" fxFlex="50" *ngSwitchCase="'grass'">{{pkType(p)}}</span>
+                <span class="type-style dark" fxFlex="50" *ngSwitchCase="'dark'">{{pkType(p)}}</span>
+                <span class="type-style poison" fxFlex="50" *ngSwitchCase="'poison'">{{pkType(p)}}</span>
+                <span class="type-style fire" fxFlex="50" *ngSwitchCase="'fire'">{{pkType(p)}}</span>
+                <span class="type-style water" fxFlex="50" *ngSwitchCase="'water'">{{pkType(p)}}</span>
+                <span class="type-style bug" fxFlex="50" *ngSwitchCase="'bug'">{{pkType(p)}}</span>
+                <span class="type-style flying" fxFlex="50" *ngSwitchCase="'flying'">{{pkType(p)}}</span>
+                <span class="type-style normal" fxFlex="50" *ngSwitchCase="'normal'">{{pkType(p)}}</span>
+                <span class="type-style electric" fxFlex="50" *ngSwitchCase="'electric'">{{pkType(p)}}</span>
+                <span class="type-style ground" fxFlex="50" *ngSwitchCase="'ground'">{{pkType(p)}}</span>
+                <span class="type-style fairy" fxFlex="50" *ngSwitchCase="'fairy'">{{pkType(p)}}</span>
+                <span class="type-style fighting" fxFlex="50" *ngSwitchCase="'fighting'">{{pkType(p)}}</span>
+                <span class="type-style psychic" fxFlex="50" *ngSwitchCase="'psychic'">{{pkType(p)}}</span>
+                <span class="type-style rock" fxFlex="50" *ngSwitchCase="'rock'">{{pkType(p)}}</span>
+                <span class="type-style steel" fxFlex="50" *ngSwitchCase="'steel'">{{pkType(p)}}</span>
+                <span class="type-style ice" fxFlex="50" *ngSwitchCase="'ice'">{{pkType(p)}}</span>
+                <span class="type-style ghost" fxFlex="50" *ngSwitchCase="'ghost'">{{pkType(p)}}</span>
+                <span class="type-style dragon" fxFlex="50" *ngSwitchCase="'dragon'">{{pkType(p)}}</span>
+              </ng-container>
+
+            </p>
+          </div>
+        </div>
+        <div fxFlex="50" fxLayoutAlign="center">
+          <div class="card-detais">
+            <div class="card-info">
+              <p>{{pokemon.weight}}</p>
+              <small>Weight</small>
+            </div>
+            <div class="card-info">
+              <p>{{pokemon.height}}</p>
+              <small>Height</small>
+            </div>
+            <div class="card-info">
+              <p>{{pokemon.base_experience}}</p>
+              <small>Base Experience</small>
+            </div>
+          </div>
+        </div>
+      </mat-card>
+    </ng-container>
+  </div>
+</div>

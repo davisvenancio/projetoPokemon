@@ -1,0 +1,19 @@
+.example-spacer {
+    flex: 1 1 auto;
+}
+
+mat-toolbar {
+    background-color: #ef5350;
+}
+
+span {
+    color: white;
+}
+
+header {
+    img {
+        @media (max-width: 576px) {
+            width: 250px;
+        }
+    }
+}
